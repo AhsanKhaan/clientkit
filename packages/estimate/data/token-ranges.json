@@ -1,0 +1,22 @@
+{
+  "$comment": "Expected tokens per stage as [low, high]. Every number here is [P]: a starting estimate written on 2026-11-17 before any site was built with this kit. After each build, compare with estimates/usage.jsonl and correct these ranges. Units: tokens.",
+  "date": "2026-11-17",
+  "label": "P",
+  "stages": {
+    "brief": { "in": [40000, 80000], "out": [5000, 10000] },
+    "keywordsLight": { "in": [30000, 60000], "out": [4000, 8000] },
+    "keywordsFull": { "in": [150000, 400000], "out": [20000, 40000] },
+    "design": { "in": [150000, 300000], "out": [30000, 60000] },
+    "buildBase": { "in": [100000, 200000], "out": [20000, 40000] },
+    "buildPerSection": { "in": [15000, 35000], "out": [4000, 9000] },
+    "buildPerFeature": { "in": [30000, 70000], "out": [6000, 14000] },
+    "cms": { "in": [200000, 400000], "out": [30000, 60000] },
+    "reviews": { "in": [200000, 450000], "out": [20000, 45000] }
+  },
+  "multipliers": {
+    "motion": { "none": 1, "subtle": 1.1, "rich": 1.4, "immersive": 1.9 },
+    "designPerMotionStep": 0.1,
+    "perExtraLanguage": 0.35,
+    "reviewsPerTwentyPages": 1
+  }
+}

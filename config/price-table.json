@@ -1,0 +1,11 @@
+{
+  "$comment": "The Admin's price table for the internal estimate. Admin only: never shown to a client. Add an API model as { \"kind\": \"api\", \"inPerM\": <price per million input tokens>, \"outPerM\": <price per million output tokens>, \"checked\": \"YYYY-MM-DD\", \"source\": \"<the vendor pricing page you read it from>\" }. A price without a check date and source is refused. Update \"date\" whenever you change a price.",
+  "date": "2026-11-17",
+  "currency": "USD",
+  "models": {
+    "subscription": {
+      "kind": "subscription",
+      "note": "Work runs under a coding-agent subscription the owner or client already pays for. Cost is 0; the tokens still count against that plan's limits."
+    }
+  }
+}

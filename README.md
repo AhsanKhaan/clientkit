@@ -7,7 +7,16 @@ for updating it afterwards. Private repository, all rights reserved.
 - **Rules for every coding agent:** `AGENTS.md`.
 
 ## Status
-Phase 1 of 10 (skeleton and provider layer) is built. Nothing here generates a site yet; that starts in Phase 2.
+- **Phase 1** (skeleton and provider layer): built.
+- **Phase 2a** (intake, purpose, CMS question, estimate, quotes, budget): built as a library, gates and command-line
+  tools. See `skills/start.md`.
+- **Phase 2b** (Desk, the web app for the estimator and quote requests): not built. It needs Cloudflare Workers, D1
+  and Access on the owner's account, and its first dependencies.
+
+Nothing here generates a site yet. Before quoting, the Admin must write `config/quote-settings.json`
+(`marginPercent`, `validityDays`, `currency`) and, for the client estimator, a rate card; no default is assumed.
+Token ranges in `packages/estimate/data/token-ranges.json` are estimates [P] until a real build corrects them, and
+`config/price-table.json` holds no API prices until the Admin adds them with a source and a check date.
 
 ## Setup (once per clone)
 Needs Node 24.22 or newer and git. There are no dependencies to install yet.
