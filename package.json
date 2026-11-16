@@ -1,0 +1,25 @@
+{
+  "name": "akclientkit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AK Client Kit: takes a client's requirements and produces a custom, animated website, with an optional private CMS.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": ">=24.22.0 <25"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "gate": "node pipeline/gate.mjs",
+    "agents:sync": "node adapters/sync.mjs",
+    "agents:check": "node adapters/sync.mjs --check",
+    "check:repo": "node scripts/check-repo.mjs",
+    "ledger:verify": "node pipeline/gate.mjs verify-ledger",
+    "hooks:install": "node guards/install.mjs",
+    "test": "node --test \"tests/**/*.test.mjs\"",
+    "verify": "npm run agents:check && npm run check:repo && npm run ledger:verify && npm test"
+  }
+}

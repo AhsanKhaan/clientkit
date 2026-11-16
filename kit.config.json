@@ -1,0 +1,11 @@
+{
+  "kit": {
+    "name": "AK Client Kit",
+    "package": "akclientkit",
+    "schemaVersion": 1
+  },
+  "hosting": {
+    "productionBranch": "main",
+    "freePlanOnly": true
+  }
+}

@@ -1,0 +1,6 @@
+# One line ending everywhere, so content hashes (approvals, the ledger, generated adapters) match on every machine.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.webp binary
+*.woff2 binary

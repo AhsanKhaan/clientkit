@@ -1,0 +1,29 @@
+# dependencies
+node_modules/
+
+# build and test output
+dist/
+out/
+.astro/
+.wrangler/
+coverage/
+test-results/
+playwright-report/
+
+# reports are regenerated; the ledger (ledger/) is committed on purpose
+reports/
+
+# secrets are never committed; .env.example is the template
+.env*
+!.env.example
+.dev.vars*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,34 @@
+{
+  "$comment": "The pipeline's stages, in order. pipeline/gate.mjs reads this file. Fields: id, agent, summary, outputs (files that must exist), checks (built-in checks), npm (scripts that must exit 0), manual (who confirms), approves (a file pinned by content hash), go (true: the owner's GO for the exact commit), when (kit.config.json values that must match, otherwise the stage is SKIPPED). Phase 2 adds the intake, purpose and estimate stages; later phases add theirs.",
+  "stages": [
+    {
+      "id": "brief",
+      "agent": "orchestrator",
+      "summary": "The client's requirements, groomed into docs/BRIEF.md",
+      "outputs": ["docs/BRIEF.md"],
+      "checks": ["no-placeholders"],
+      "npm": []
+    },
+    {
+      "id": "brief-approval",
+      "agent": "owner",
+      "summary": "The owner approves docs/BRIEF.md as it is now by typing APPROVE <hash>",
+      "manual": "The owner typed 'APPROVE <hash>' in chat for docs/BRIEF.md at its current content",
+      "approves": "docs/BRIEF.md"
+    },
+    {
+      "id": "build",
+      "agent": "coder",
+      "summary": "The site is built; every earlier approval still matches its file",
+      "checks": ["approvals-current"],
+      "npm": ["verify"]
+    },
+    {
+      "id": "go",
+      "agent": "owner",
+      "summary": "The owner types GO for the exact commit",
+      "manual": "The owner typed 'GO <sha>' in chat for the current commit",
+      "go": true
+    }
+  ]
+}
