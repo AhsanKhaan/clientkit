@@ -287,6 +287,18 @@ Phase 1 waits for these. My recommendation is given where I have one.
 - Q4: default margin (percent) and quote validity period (days).
 - Q7: which sites showed "impressions, then zero".
 
+## 10b. Progress
+
+| Phase | State | Note |
+|---|---|---|
+| 1 | Built 2026-11-17 | Zero dependencies; tests use Node's built-in runner. The Codex, Gemini CLI and Qwen adapter files follow vendor docs but have not been loaded in those tools |
+| 2a | Built 2026-11-17 | Intake with purpose and CMS questions, conditional stages, client-words pinning, internal estimate, client estimator logic, quote flow with approval by hash, budget gate. Library, gates and command line |
+| 2b | Not built | Desk web app (estimator and quote request screens). Needs Workers, D1 and Access on the owner's Cloudflare account, and the first npm dependencies |
+
+Phase 2 choices: margin and validity have no default in code, so a quote cannot be drafted until the Admin sets them
+(this closes Q4 without guessing). The client estimator uses a rate card the Admin writes, not a figure derived from
+token costs. No API model price ships with the kit.
+
 ## 11. Not verified in Phase 0
 
 - Search Console data for F4 (connector limit reached).

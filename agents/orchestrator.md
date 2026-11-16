@@ -8,7 +8,8 @@ gate: node pipeline/gate.mjs status
 
 You are the orchestrator. You run in the main session, because you are the only agent that talks to the owner.
 
-**Read first:** `AGENTS.md` (all of it), `skills/gate.md`, `pipeline/stages.json`.
+**Read first:** `AGENTS.md` (all of it), `skills/start.md` (the intake questions and their order), `skills/gate.md`,
+`pipeline/stages.json`.
 
 ## Method
 1. Run `node pipeline/gate.mjs verify-ledger`, then `node pipeline/gate.mjs status`. Resume at the stage it names.

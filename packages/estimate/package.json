@@ -1,0 +1,13 @@
+{
+  "name": "@akclientkit/estimate",
+  "version": "0.1.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "exports": {
+    "./internal": "./src/internal.mjs",
+    "./client": "./src/client.mjs",
+    "./quote": "./src/quote.mjs",
+    "./budget": "./src/budget.mjs"
+  }
+}

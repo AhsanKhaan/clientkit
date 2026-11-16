@@ -1,13 +1,34 @@
 {
-  "$comment": "The pipeline's stages, in order. pipeline/gate.mjs reads this file. Fields: id, agent, summary, outputs (files that must exist), checks (built-in checks), npm (scripts that must exit 0), manual (who confirms), approves (a file pinned by content hash), go (true: the owner's GO for the exact commit), when (kit.config.json values that must match, otherwise the stage is SKIPPED). Phase 2 adds the intake, purpose and estimate stages; later phases add theirs.",
+  "$comment": "The pipeline's stages, in order. pipeline/gate.mjs reads this file. Fields: id, agent, summary, outputs (files that must exist), checks (pipeline/lib/checks.mjs), npm (scripts that must exit 0), budget (true: refuse at 100% of the token budget), manual (who confirms), approves (a file pinned by content hash), go (true: the owner's GO for the exact commit), when (kit.config.json values that must match, otherwise the stage is SKIPPED), pending (the phase that builds this stage's gate; until then it is BLOCKED).",
   "stages": [
+    {
+      "id": "intake",
+      "agent": "orchestrator",
+      "summary": "Purpose, client requirements and the CMS answer; the client's words saved exactly",
+      "outputs": ["kit.config.json", "intake/client-words.md"],
+      "checks": ["config-valid", "client-words-pinned"]
+    },
+    {
+      "id": "quote",
+      "agent": "orchestrator",
+      "summary": "The quote for this project is approved by the Admin and accepted by the client",
+      "checks": ["quote-accepted"]
+    },
+    {
+      "id": "estimate",
+      "agent": "orchestrator",
+      "summary": "Tokens and cost per stage as ranges, and a token budget set by the Admin",
+      "outputs": ["estimates/estimate.json", "estimates/budget.json"],
+      "checks": ["estimate-present"],
+      "budget": true
+    },
     {
       "id": "brief",
       "agent": "orchestrator",
       "summary": "The client's requirements, groomed into docs/BRIEF.md",
       "outputs": ["docs/BRIEF.md"],
-      "checks": ["no-placeholders"],
-      "npm": []
+      "checks": ["client-words-unchanged", "no-placeholders"],
+      "budget": true
     },
     {
       "id": "brief-approval",
@@ -17,11 +38,45 @@
       "approves": "docs/BRIEF.md"
     },
     {
+      "id": "keywords-light",
+      "agent": "keyword-researcher",
+      "summary": "Brand, service and local terms only",
+      "when": { "project.purpose": "brand-first" },
+      "pending": "Phase 3"
+    },
+    {
+      "id": "keywords-full",
+      "agent": "keyword-researcher",
+      "summary": "The full keyword pipeline with a difficulty number on every keyword",
+      "when": { "project.purpose": ["search-first", "both"] },
+      "pending": "Phase 3"
+    },
+    {
+      "id": "design",
+      "agent": "designer",
+      "summary": "Three directions as rendered previews, then docs/DESIGN.md",
+      "pending": "Phase 4"
+    },
+    {
+      "id": "design-approval",
+      "agent": "owner",
+      "summary": "The owner approves the design files by hash",
+      "pending": "Phase 4"
+    },
+    {
+      "id": "cms-setup",
+      "agent": "coder",
+      "summary": "Connect the site to a CMS instance",
+      "when": { "cms.enabled": true },
+      "pending": "Phase 6"
+    },
+    {
       "id": "build",
       "agent": "coder",
       "summary": "The site is built; every earlier approval still matches its file",
-      "checks": ["approvals-current"],
-      "npm": ["verify"]
+      "checks": ["client-words-unchanged", "approvals-current"],
+      "npm": ["verify"],
+      "budget": true
     },
     {
       "id": "go",

@@ -60,7 +60,14 @@ question; it never guesses. If a tool has no sub-agents, the main session reads 
 itself.
 
 ## 3. Pipeline and gates
-Stages are listed in `pipeline/stages.json`. How to run a gate is in `skills/gate.md`.
+Stages are listed in `pipeline/stages.json`. How to start a project is in `skills/start.md`; how to run a gate is in
+`skills/gate.md`. The intake always asks the site's purpose (brand-first, search-first or both) and whether the client
+wants a CMS; the answers decide which stages apply (`node pipeline/gate.mjs plan`).
+
+Two estimate paths are kept apart in the code: `packages/estimate/src/client.mjs` (the indicative estimator a client
+may use, from the Admin's published rate card only) and `packages/estimate/src/internal.mjs` plus `quote.mjs` (token
+costs, margin and quotes, Admin only). Never import the internal module into the client path, and never show a client
+a quote the Admin has not approved by hash.
 
 ```text
 node pipeline/gate.mjs status                 the latest result per stage, and the next one
